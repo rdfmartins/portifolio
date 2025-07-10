@@ -1,0 +1,537 @@
+:root {
+    --bg-primary: #1a1d24;
+    --bg-secondary: #242831;
+    --border-color: #2c303a;
+    --text-primary: #f0f0f0;
+    --text-secondary: #c5c6c7;
+    --text-headings: #ffffff;
+    --accent-primary: #007BFF;
+    --accent-hover: #4ca8ff;
+    --scrollbar-thumb: #555;
+    --scrollbar-track: #2c303a;
+}
+
+/* Estilos Globais e Mobile-First */
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+/* Cabeçalho e Navegação (Mobile) */
+header {
+    background: var(--bg-primary);
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-headings);
+}
+
+#hamburger-menu {
+    display: block;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1002;
+    position: relative;
+}
+
+#hamburger-menu span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px 0;
+    background: var(--text-primary);
+    transition: 0.4s;
+}
+
+#hamburger-menu.active span {
+    background: var(--text-headings);
+}
+
+#hamburger-menu.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+#hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+#hamburger-menu.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+#nav-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 29, 36, 0.95);
+    transition: right 0.4s ease-in-out;
+    z-index: 1001;
+    gap: 20px;
+}
+
+#nav-links.active {
+    right: 0;
+}
+
+#nav-links a {
+    color: var(--text-headings);
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+/* Seções Gerais (Mobile) */
+section {
+    padding: 60px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+section:last-of-type {
+    border-bottom: none;
+}
+
+section h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-headings);
+}
+
+/* Seção Sobre Mim (Mobile) */
+#about {
+    padding-top: 40px;
+}
+
+#about .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+}
+
+#about img {
+    width: 100%;
+    max-width: 100%; /* Ajustado para preencher o contêiner */
+    height: auto;
+    border-radius: 0;
+    display: block;
+    margin: 0 auto 20px auto;
+    border: 2px solid var(--border-color);
+}
+
+.profile-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 250px; /* Largura para mobile */
+    margin: 0 auto 20px auto; /* Centraliza o container */
+    overflow: hidden; /* Garante que o overlay não vaze */
+    border-radius: 0; /* Mantém o formato quadrado */
+    box-sizing: border-box; /* Inclui padding e borda no tamanho total */
+    height: 354px; /* Altura para mobile (250px largura + 100px altura extra + 4px borda) */
+}
+
+.profile-image-container img {
+    display: block;
+    width: 100%;
+    height: 350px; /* Altura da imagem para mobile */
+    object-fit: cover; /* Garante que a imagem cubra o espaço, cortando se necessário */
+    border-radius: 0;
+    border: 2px solid var(--border-color);
+}
+
+.prompt-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Alterado de fit-content para 100% */
+    min-width: 130px; /* Largura mínima para acomodar o texto mais longo */
+    height: 35px; /* Altura fixa */
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    line-height: 35px; /* Centraliza o texto verticalmente */
+    box-sizing: border-box; /* Inclui padding e borda no tamanho total */
+    padding: 0 8px; /* Mantém padding horizontal, remove vertical */
+    white-space: nowrap; /* Impede que o texto quebre linha */
+}
+
+.profile-image-container:hover .prompt-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#about .about-text h2 {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    color: var(--text-headings);
+}
+
+/* Ícones Sociais (Mobile) */
+.social-icons {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.social-icons a {
+    font-size: 1.8rem;
+    transition: color 0.3s ease;
+}
+
+.social-icons .fa-whatsapp { color: #25D366; }
+.social-icons .fa-github { color: #FFFFFF; }
+.social-icons .fa-linkedin { color: #0A66C2; }
+.social-icons .cv-link {
+    font-size: 1.8rem;
+    color: var(--accent-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--accent-hover);
+}
+
+/* Seção de Habilidades (Mobile) */
+#skills {
+    background: var(--bg-secondary);
+    padding: 40px 0; /* Altura da seção reduzida */
+}
+
+#skills h2 {
+    margin-bottom: 30px; /* Espaçamento do título reduzido */
+}
+
+.skills-grid {
+    display: flex;
+    overflow: hidden; /* Esconde a barra de rolagem */
+    width: 100%;
+    position: relative;
+    padding: 10px 0; /* Adiciona um pequeno padding vertical */
+}
+
+.skills-carousel-inner {
+    display: flex;
+    animation: scroll-skills 30s linear infinite; /* Ajuste a duração conforme necessário */
+    white-space: nowrap; /* Garante que os itens fiquem na mesma linha */
+}
+
+@keyframes scroll-skills {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-50%); /* Rola metade do conteúdo para um loop suave */
+    }
+}
+
+.skill-item {
+    flex-shrink: 0; /* Impede que os itens encolham */
+    width: 100px; /* Largura fixa para cada item do carrossel */
+    text-align: center;
+    /* background: var(--bg-primary); */
+    padding: 0; /* Padding interno reduzido */
+    border-radius: 0;
+    border: none;
+    /* transition: transform 0.3s ease, border-color 0.3s ease; */
+}
+
+.skill-item:hover {
+    /* transform: translateY(-5px); */
+}
+
+.skill-item i {
+    font-size: 1.8rem; /* Tamanho do ícone reduzido */
+    margin-bottom: 5px; /* Margem do ícone reduzida */
+}
+
+.skill-item .fa-html5 { color: #E44D26; }
+.skill-item .fa-css3-alt { color: #1572B6; }
+.skill-item .fa-js-square { color: #F7DF1E; }
+.skill-item .fa-python { color: #3776AB; }
+.skill-item .fa-robot { color: #00BCD4; }
+.skill-item .fa-database { color: #4479A1; }
+.skill-item .fa-cubes { color: #FF6600; } /* n8n */
+.skill-item .fa-gear { color: #66BB6A; } /* Make */
+.skill-item .fa-sass { color: #CC6699; } /* Sass */
+
+.skill-item h3 {
+    display: none; /* Oculta o texto completamente em mobile */
+}
+
+.skill-item:hover h3 {
+    height: 1.2em; /* Altura para mostrar o texto */
+    opacity: 1; /* Torna o texto visível */
+}
+
+/* Projetos (Mobile) */
+#projects {
+    background: var(--bg-secondary);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+.project-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-primary);
+}
+
+.project-card .project-info {
+    padding: 25px;
+}
+
+.project-card h3 {
+    color: var(--text-headings);
+    margin-top: 0;
+    font-size: 1.3rem;
+}
+
+.project-card p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+/* Contato (Mobile) */
+#contact a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+#contact a:hover {
+    color: var(--accent-hover);
+}
+
+/* Rodapé (Mobile) */
+footer {
+    background: var(--bg-primary);
+    color: #888;
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 0;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Botão Voltar ao Topo (Mobile) */
+#back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    border: none;
+    outline: none;
+    background-color: var(--accent-primary);
+    color: white;
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+    border-radius: 8px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+#back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#back-to-top:hover {
+    background-color: var(--accent-hover);
+    transform: scale(1.1);
+}
+
+/* Barra de Rolagem */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+/* ----------------------------------- */
+/* Media Query para Telas Maiores (Desktop) */
+/* ----------------------------------- */
+@media (min-width: 769px) {
+    /* Navegação Desktop */
+    #hamburger-menu {
+        display: none;
+    }
+
+    #nav-links {
+        position: static;
+        flex-direction: row;
+        width: auto;
+        height: auto;
+        background: none;
+        transform: none;
+        right: 0;
+    }
+
+    #nav-links a {
+        color: var(--text-primary);
+        text-decoration: none;
+        margin-left: 25px;
+        font-weight: 500;
+        font-size: 1rem;
+    }
+    
+    #nav-links a:hover {
+        color: var(--accent-primary);
+    }
+
+    /* Seções Gerais Desktop */
+    section h2 {
+        font-size: 2.4rem;
+    }
+
+    /* Seção Sobre Mim Desktop */
+    #about {
+        padding-top: 100px;
+    }
+
+    #about .container {
+        flex-direction: row;
+        text-align: left;
+        gap: 50px;
+    }
+
+    #about img {
+        max-width: 350px;
+    }
+
+    .profile-image-container {
+        max-width: 350px; /* Largura para desktop */
+        height: 454px; /* Altura para desktop (350px largura + 100px altura extra + 4px borda) */
+    }
+
+    .profile-image-container img {
+        height: 450px; /* Altura da imagem para desktop */
+    }
+
+    #about .about-text h2 {
+        text-align: left;
+        font-size: 2rem;
+    }
+
+    .social-icons {
+        justify-content: flex-end;
+    }
+
+    /* Seção de Habilidades Desktop */
+    .skills-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    /* Desktop specific styles for skill items */
+    .skill-item h3 {
+        display: none; /* Oculta o texto completamente em desktop */
+    }
+
+    .skill-item:hover {
+        transform: translateY(-5px); /* Re-enable hover effect for desktop */
+    }
+
+    /* Projetos Desktop */
+    .projects-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Botão Voltar ao Topo Desktop */
+    #back-to-top {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        bottom: 30px;
+        right: 30px;
+    }
+}
