@@ -535,3 +535,47 @@ footer {
         right: 30px;
     }
 }
+
+/* Estilos para a página "Em Construção" */
+.under-construction-body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    text-align: center;
+    margin: 0;
+}
+
+.under-construction-container {
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-secondary);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.under-construction-h1 {
+    font-size: 2.5rem;
+    color: var(--accent-primary);
+    margin-bottom: 15px;
+}
+
+.under-construction-p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.under-construction-icon {
+    font-size: 4rem; /* Tamanho do ícone */
+    color: var(--accent-primary);
+    margin-bottom: 20px;
+    animation: spin 2s linear infinite; /* Animação de rotação */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
